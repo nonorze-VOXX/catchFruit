@@ -44,17 +44,18 @@ namespace Platformer.Mechanics
 
         private void OnCollisionEnter2D(Collision2D other)
         {
+            if (other.transform.CompareTag("token"))
+            {
+                return;
+            }
+
             if (other.transform.CompareTag("Player"))
             {
                 fruitData.score += 1;
-                gameObject.SetActive(false);
-                Destroy(this);
             }
-            else
-            {
+
+            fruitData.tokenInstancesList.Enqueue(this.gameObject);
                 gameObject.SetActive(false);
-                Destroy(this);
-            }
         }
 
         void OnTriggerEnter2D(Collider2D other)

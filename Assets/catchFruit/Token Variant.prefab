@@ -83,5 +83,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Token Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8093540630042670020, guid: dc0c7f4b73ee2294e9c31b88ee0e1743,
+        type: 3}
+      propertyPath: m_TagString
+      value: token
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc0c7f4b73ee2294e9c31b88ee0e1743, type: 3}

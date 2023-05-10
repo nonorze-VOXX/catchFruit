@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6197d666cc874d5a89b2f6df4c1bb4d9, type: 3}
   m_Name: fruitData
   m_EditorClassIdentifier: 
-  score: 0
-  minX: 0
-  maxX: 0
-  fruitHeight: 0
+  score: 935
+  minX: -4.8
+  maxX: 2.35
+  fruitHeight: 8
