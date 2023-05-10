@@ -1,6 +1,9 @@
+using System;
+using catchFruit;
 using Platformer.Gameplay;
 using UnityEngine;
 using static Platformer.Core.Simulation;
+using Random = UnityEngine.Random;
 
 
 namespace Platformer.Mechanics
@@ -13,6 +16,7 @@ namespace Platformer.Mechanics
     [RequireComponent(typeof(Collider2D))]
     public class TokenInstance : MonoBehaviour
     {
+        public FruitData fruitData;
         public AudioClip tokenCollectAudio;
         [Tooltip("If true, animation will start at a random position in the sequence.")]
         public bool randomAnimationStartTime = false;
@@ -38,6 +42,21 @@ namespace Platformer.Mechanics
             sprites = idleAnimation;
         }
 
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.transform.CompareTag("Player"))
+            {
+                fruitData.score += 1;
+                gameObject.SetActive(false);
+                Destroy(this);
+            }
+            else
+            {
+                gameObject.SetActive(false);
+                Destroy(this);
+            }
+        }
+
         void OnTriggerEnter2D(Collider2D other)
         {
             //only exectue OnPlayerEnter if the player collides with this token.
@@ -47,6 +66,8 @@ namespace Platformer.Mechanics
 
         void OnPlayerEnter(PlayerController player)
         {
+            this.gameObject.SetActive(false);
+            return;
             if (collected) return;
             //disable the gameObject and remove it from the controller update list.
             frame = 0;
