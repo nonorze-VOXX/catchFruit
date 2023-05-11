@@ -21,7 +21,7 @@ namespace Platformer.Mechanics
         [Tooltip("If true, animation will start at a random position in the sequence.")]
         public bool randomAnimationStartTime = false;
         [Tooltip("List of frames that make up the animation.")]
-        public Sprite[] idleAnimation, collectedAnimation;
+        // public Sprite[] idleAnimation, collectedAnimation;
 
         internal Sprite[] sprites = new Sprite[0];
 
@@ -39,7 +39,7 @@ namespace Platformer.Mechanics
             _renderer = GetComponent<SpriteRenderer>();
             if (randomAnimationStartTime)
                 frame = Random.Range(0, sprites.Length);
-            sprites = idleAnimation;
+            // sprites = idleAnimation;
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -72,7 +72,7 @@ namespace Platformer.Mechanics
             if (collected) return;
             //disable the gameObject and remove it from the controller update list.
             frame = 0;
-            sprites = collectedAnimation;
+            // sprites = collectedAnimation;
             if (controller != null)
                 collected = true;
             //send an event into the gameplay system to perform some behaviour.

@@ -18,5 +18,7 @@ namespace catchFruit
 
         public Queue<GameObject> tokenInstancesList;
 
+        [SerializeField]
+        public Sprite[] fruitPicture;
     }
 }

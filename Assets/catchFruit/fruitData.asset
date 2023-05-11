@@ -16,3 +16,5 @@ MonoBehaviour:
   minX: -4.8
   maxX: 2.35
   fruitHeight: 8
+  fruitPicture:
+  - {fileID: 21300000, guid: d76e449fc5d0acae687de300fcebbc48, type: 3}

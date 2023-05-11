@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml.Schema;
 using UnityEngine;
@@ -11,9 +12,12 @@ namespace catchFruit
     {
         public FruitData fruitData;
         public GameObject fruit;
+        public GameObject testFruit;
         public GameObject fruitContainer;
         private float _nextFruitCounter;
         private float _nextFruitTime;
+        
+        
         private void Start()
         {
             Init();
@@ -28,6 +32,7 @@ namespace catchFruit
             _nextFruitTime = 0.01F;
             fruitData.tokenInstancesList = new Queue<GameObject>();
             fruitData.tokenInstancesList.Clear();
+            test();
         }
 
         private void Update()
@@ -46,6 +51,11 @@ namespace catchFruit
             {
                 GameObject tmp = Instantiate(fruit, fruitContainer.transform);
                  fruitData.tokenInstancesList.Enqueue(tmp);
+                SpriteRenderer sp = tmp.GetComponent<SpriteRenderer>();
+                Texture2D tex = Resources.Load("egg") as Texture2D;
+                sp.sprite = Sprite.Create(
+                    tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f
+                );
             }
             
             GameObject newFruit = fruitData.tokenInstancesList.First();
@@ -54,14 +64,16 @@ namespace catchFruit
             newPosition.x = RandomX();
             newPosition.y = fruitData.fruitHeight;
             newFruit.transform.position = newPosition;
-            Debug.Log(newFruit);
-            Debug.Log("A");
             newFruit.gameObject.SetActive(true);
         }
 
         private float RandomX()
         {
             return Random.Range(fruitData.minX, fruitData.maxX);
+        }
+        private void test()
+        {
+            Debug.Log(Resources.Load("egg"));
         }
     }
 }
