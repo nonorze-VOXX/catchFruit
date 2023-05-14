@@ -12,11 +12,12 @@ namespace catchFruit
     {
         public FruitData fruitData;
         public GameObject fruit;
-        public GameObject testFruit;
         public GameObject fruitContainer;
         private float _nextFruitCounter;
         private float _nextFruitTime;
-        
+
+        private Queue<string> pictureName;
+        private int nowPictureIndex;
         
         private void Start()
         {
@@ -25,6 +26,13 @@ namespace catchFruit
 
         private void Init()
         {
+            nowPictureIndex = 0;
+            pictureName = new Queue<string>();
+            pictureName.Clear();
+            for (int i = 1; i <= 3; i++)
+            {
+                pictureName.Enqueue("egg"+i);
+            }
             fruitData.score = 0;
             fruitData.maxX = 2.35F;
             fruitData.minX = -4.8F;
@@ -32,7 +40,6 @@ namespace catchFruit
             _nextFruitTime = 0.01F;
             fruitData.tokenInstancesList = new Queue<GameObject>();
             fruitData.tokenInstancesList.Clear();
-            test();
         }
 
         private void Update()
@@ -52,7 +59,9 @@ namespace catchFruit
                 GameObject tmp = Instantiate(fruit, fruitContainer.transform);
                  fruitData.tokenInstancesList.Enqueue(tmp);
                 SpriteRenderer sp = tmp.GetComponent<SpriteRenderer>();
-                Texture2D tex = Resources.Load("egg") as Texture2D;
+                var name = pictureName.Dequeue();
+                Texture2D tex = Resources.Load(name) as Texture2D;
+                pictureName.Enqueue(name);
                 sp.sprite = Sprite.Create(
                     tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f
                 );
@@ -70,10 +79,6 @@ namespace catchFruit
         private float RandomX()
         {
             return Random.Range(fruitData.minX, fruitData.maxX);
-        }
-        private void test()
-        {
-            Debug.Log(Resources.Load("egg"));
         }
     }
 }
